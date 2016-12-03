@@ -2,6 +2,7 @@ package com.shuiyouwen.fragme.base;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.CheckResult;
@@ -9,7 +10,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
+import com.shuiyouwen.fragme.BuildConfig;
+import com.shuiyouwen.fragme.RxBusTag;
+import com.shuiyouwen.fragme.bean.TestBean;
+import com.shuiyouwen.fragme.feature.module1.NetErrorActivity;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
@@ -24,6 +34,7 @@ import rx.subjects.BehaviorSubject;
  */
 
 public class BaseActivity extends AppCompatActivity implements IBaseView, LifecycleProvider<ActivityEvent> {
+    public final static int NET_ERROR_REQ = 121;
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
@@ -52,6 +63,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView, Lifecy
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(ActivityEvent.CREATE);
+        RxBus.get().register(this);
     }
 
     @Override
@@ -77,17 +89,19 @@ public class BaseActivity extends AppCompatActivity implements IBaseView, Lifecy
 
     @Override
     @CallSuper
+    protected void onDestroy() {
+        lifecycleSubject.onNext(ActivityEvent.DESTROY);
+        RxBus.get().unregister(this);
+        super.onDestroy();
+    }
+
+    @Override
+    @CallSuper
     protected void onStop() {
         lifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
     }
 
-    @Override
-    @CallSuper
-    protected void onDestroy() {
-        lifecycleSubject.onNext(ActivityEvent.DESTROY);
-        super.onDestroy();
-    }
 
     private ProgressDialog mProgressDialog;
 
@@ -122,6 +136,33 @@ public class BaseActivity extends AppCompatActivity implements IBaseView, Lifecy
 
     @Override
     public void launchLogin() {
+
+    }
+
+    /**
+     * 获取当前方法名
+     *
+     * @return
+     */
+    protected String getApiMethodName() {
+        return Thread.currentThread().getStackTrace()[3].getMethodName();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NET_ERROR_REQ && resultCode == NetErrorActivity.NET_ERROR_RES) {
+            String methodName = data.getStringExtra(NetErrorActivity.METHOD_NAME);
+            if (!TextUtils.isEmpty(methodName)) {
+                retryCallApiMethod(methodName);
+            }
+        }
+    }
+
+    //反射尝试再次调用接口方法
+    private void retryCallApiMethod(String methodName) {
+        Log.d("BaseActivity", "开始反射调用接口方法...");
 
     }
 }
