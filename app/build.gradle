@@ -1,12 +1,42 @@
 apply plugin: 'com.android.application'
 
+//获取当前日期
+def releaseTime() {
+    return new Date().format("yyyyMMdd")
+}
+
+//切换接口环境
+Map<String, String> propertices = project.getProperties();
+String environment = "product";//接口环境，默认生产
+
+def copyUrlConfig(path) {
+    copy {
+        from('config/' + path) {
+            include('**/*')
+        }
+        into('src/main/assets/config')
+    }
+}
+
+if (propertices.containsKey("environment")) {
+    environment = propertices.get("environment");
+    if (!environment.equals("product") && !environment.equals("preproduct")) {
+        throw new Exception("环境切换错误，请检查！");
+    }
+} else {
+    environment = "product";
+}
+
+copyUrlConfig(environment);
+println("---项目 environment: " + environment + "----")
+
 android {
-    compileSdkVersion 26
+    compileSdkVersion 25
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.iuicity.xinjr"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -16,6 +46,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+//        applicationVariants.all { variant ->
+//            variant.outputs.each { output ->
+//                def outputFile = output.outputFile
+//                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                    environment = propertices.containsKey("environment") ? propertices.get("environment") : "product";
+//                    def fileName = "Xinjr_V${defaultConfig.versionName}_${releaseTime()}_${environment}_${variant.buildType.name}.apk"
+//                    output.outputFile = new File(outputFile.parent, fileName)
+//                }
+//            }
+//        }
     }
 }
 
@@ -24,8 +64,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:recyclerview-v7:26.+'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     //butterknife资源文件findViewById
@@ -47,8 +87,8 @@ dependencies {
     compile 'com.hwangjr.rxbus:rxbus:2.0.0-beta'
     //rxjava和fragment或activity生命周期绑定，防止内存泄露
     compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
-    //简化fragment操作，并解决了其中的某些bug
-    compile 'me.yokeyword:fragmentation-core:1.0.4'
+    //网络请求进度提示
+    compile 'com.kaopiz:kprogresshud:1.1.0'
 
     //解决GsonFormat插件报错
     debugCompile 'io.github.openfeign:feign-gson:9.4.0'
