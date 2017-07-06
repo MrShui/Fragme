@@ -1,9 +1,8 @@
 package com.iuicity.xinjr.network.helper;
 
-import com.tiannt.indescribable.network.bean.ResultModel;
-import com.tiannt.indescribable.network.exception.DecodeException;
-import com.tiannt.indescribable.network.exception.ServerException;
-import com.tiannt.indescribable.network.exception.TokenException;
+import com.iuicity.xinjr.network.bean.ResultModel;
+import com.iuicity.xinjr.network.exception.ServerException;
+import com.iuicity.xinjr.network.exception.TokenException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -36,13 +35,7 @@ public class RxResultHelper {
                             //登录状态失效
                             return Observable.error(new TokenException(tResultModel.getMsg(), tResultModel.getCode()));
                         } else {
-                            if (ResultModel.REQ_DECODE_ERROR.contains(tResultModel.getCode())) {
-                                //解密相关异常
-                                return Observable.error(new DecodeException(tResultModel.getMsg(), tResultModel.getCode()));
-                            } else {
-                                //其它服务器错误
-                                return Observable.error(new ServerException(tResultModel.getMsg(), tResultModel.getCode()));
-                            }
+                            return Observable.error(new ServerException(tResultModel.getMsg(), tResultModel.getCode()));
                         }
                     }
                 });

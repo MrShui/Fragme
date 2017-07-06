@@ -2,6 +2,7 @@ package com.iuicity.xinjr.network;
 
 import com.iuicity.xinjr.BuildConfig;
 import com.iuicity.xinjr.network.api.Api;
+import com.iuicity.xinjr.network.api.MockApi;
 import com.iuicity.xinjr.network.interceptor.BasicParamsInterceptor;
 import com.iuicity.xinjr.network.interceptor.HttpLoggingInterceptor;
 import com.iuicity.xinjr.utils.GetConfiguration;
@@ -71,7 +72,6 @@ public class RetrofitClient {
                 .build();
         behavior.setDelay(2, TimeUnit.SECONDS);
         BehaviorDelegate<Api> delegate = mockRetrofit.create(Api.class);
-//        return new MockApi(delegate);
-        return null;
+        return new MockApi(delegate);
     }
 }
