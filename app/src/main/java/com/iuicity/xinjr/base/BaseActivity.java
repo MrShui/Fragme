@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.iuicity.xinjr.feature.login.LoginActivity;
+import com.iuicity.xinjr.utils.AccountManager;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -39,6 +40,7 @@ public class BaseActivity extends AppCompatActivity implements LifecycleProvider
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(ActivityEvent.CREATE);
         initSystemFont();
+        AccountManager.getInstance().getSaveInstance(savedInstanceState);
     }
 
     @Override
@@ -154,5 +156,11 @@ public class BaseActivity extends AppCompatActivity implements LifecycleProvider
         if (requestCode == REQ_LOGIN && resultCode == LoginActivity.RESULT_LOGIN_SUCCESS) {
             loginBack();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        AccountManager.getInstance().onSaveInstance(outState);
+        super.onSaveInstanceState(outState);
     }
 }

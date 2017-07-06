@@ -9,6 +9,7 @@ import retrofit2.http.Field;
 import retrofit2.mock.BehaviorDelegate;
 
 /**
+ * 模拟接口
  * Created by Mc丶水水 on 2017/3/31 0031.
  */
 

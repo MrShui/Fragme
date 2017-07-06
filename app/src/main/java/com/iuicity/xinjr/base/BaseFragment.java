@@ -7,6 +7,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import static com.iuicity.xinjr.constants.C.REQ_LOGIN_KEY;
 public class BaseFragment extends Fragment implements LifecycleProvider<FragmentEvent>, IBaseView {
     private KProgressHUD mKProgressHUD;
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
+    private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
 
     @Override
     public void onAttach(Activity activity) {
@@ -44,6 +46,17 @@ public class BaseFragment extends Fragment implements LifecycleProvider<Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(FragmentEvent.CREATE);
+        if (savedInstanceState != null) {
+            boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            if (isSupportHidden) {
+                ft.hide(this);
+            } else {
+                ft.show(this);
+            }
+            ft.commit();
+        }
     }
 
 
@@ -171,5 +184,11 @@ public class BaseFragment extends Fragment implements LifecycleProvider<Fragment
         if (requestCode == REQ_LOGIN && resultCode == LoginActivity.RESULT_LOGIN_SUCCESS) {
             loginBack();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
     }
 }

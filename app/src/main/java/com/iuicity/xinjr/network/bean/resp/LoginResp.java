@@ -1,12 +1,15 @@
 package com.iuicity.xinjr.network.bean.resp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author: luosheng
  * @time: 2017/3/28 0028 12:44
  * @desc: <类的描述>
  */
 
-public class LoginResp {
+public class LoginResp implements Parcelable {
 
 
     /**
@@ -52,4 +55,39 @@ public class LoginResp {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.token);
+        dest.writeString(this.uid);
+        dest.writeString(this.type);
+        dest.writeString(this.status);
+    }
+
+    public LoginResp() {
+    }
+
+    protected LoginResp(Parcel in) {
+        this.token = in.readString();
+        this.uid = in.readString();
+        this.type = in.readString();
+        this.status = in.readString();
+    }
+
+    public static final Parcelable.Creator<LoginResp> CREATOR = new Parcelable.Creator<LoginResp>() {
+        @Override
+        public LoginResp createFromParcel(Parcel source) {
+            return new LoginResp(source);
+        }
+
+        @Override
+        public LoginResp[] newArray(int size) {
+            return new LoginResp[size];
+        }
+    };
 }
