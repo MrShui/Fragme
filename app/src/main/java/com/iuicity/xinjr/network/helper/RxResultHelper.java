@@ -1,5 +1,7 @@
 package com.iuicity.xinjr.network.helper;
 
+import android.text.TextUtils;
+
 import com.iuicity.xinjr.network.bean.ResultModel;
 import com.iuicity.xinjr.network.exception.ServerException;
 import com.iuicity.xinjr.network.exception.TokenException;
@@ -28,14 +30,15 @@ public class RxResultHelper {
                             return Observable.error(new ServerException("服务器返回错误", -1));
                         }
 
-                        if (tResultModel.getCode() == ResultModel.REQ_SUCCESS) {
+                        if (tResultModel.getCode() == ResultModel.Companion.getREQ_SUCCESS()) {
                             //网络请求成功
                             return createData(tResultModel.getData());
-                        } else if (ResultModel.REQ_TOKEN_ERROR.contains(tResultModel.getCode())) {
+                        } else if (ResultModel.Companion.getREQ_TOKEN_ERROR().contains(tResultModel.getCode())) {
                             //登录状态失效
                             return Observable.error(new TokenException(tResultModel.getMsg(), tResultModel.getCode()));
                         } else {
-                            return Observable.error(new ServerException(tResultModel.getMsg(), tResultModel.getCode()));
+                            return Observable.error(new ServerException(TextUtils.isEmpty(tResultModel.getMsg())
+                                    ? "" : tResultModel.getMsg(), tResultModel.getCode()));
                         }
                     }
                 });

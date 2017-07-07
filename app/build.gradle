@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 //获取当前日期
 def releaseTime() {
@@ -67,10 +69,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     testCompile 'junit:junit:4.12'
-    //butterknife资源文件findViewById
-    compile 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
     //BaseRecyclerViewAdapterHelper简化recycleView adapter使用
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     //retrofit2网络请求
@@ -93,4 +94,7 @@ dependencies {
     debugCompile 'io.github.openfeign:feign-gson:9.4.0'
     //debug模式下检测app内存泄露情况
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+}
+repositories {
+    mavenCentral()
 }
