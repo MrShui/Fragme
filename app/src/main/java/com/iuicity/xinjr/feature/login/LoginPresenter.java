@@ -15,14 +15,15 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
+ * 登录presenter
  * Created by Shui on 2017/7/5.
  */
 
-public class LoginPresenter implements LoginConstract.Presenter {
+class LoginPresenter implements LoginConstract.Presenter {
 
     private final LoginConstract.View mView;
 
-    public LoginPresenter(LoginConstract.View view) {
+    LoginPresenter(LoginConstract.View view) {
         mView = view;
     }
 
