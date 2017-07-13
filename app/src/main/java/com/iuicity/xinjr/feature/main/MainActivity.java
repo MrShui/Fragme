@@ -14,7 +14,7 @@ import com.iuicity.xinjr.R;
 import com.iuicity.xinjr.base.BaseActivity;
 import com.iuicity.xinjr.feature.home.HomeFragment;
 import com.iuicity.xinjr.feature.three.ThreeFragment;
-import com.iuicity.xinjr.feature.two.TwoFragment;
+import com.iuicity.xinjr.feature.invest.InvestFragment;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity {
 
     {
         mFragmentSparseArray.append(R.id.tv_home, HomeFragment.newInstance());
-        mFragmentSparseArray.append(R.id.tv_invest, TwoFragment.newInstance());
+        mFragmentSparseArray.append(R.id.tv_invest, InvestFragment.newInstance());
         mFragmentSparseArray.append(R.id.tv_mine, ThreeFragment.newInstance());
     }
 

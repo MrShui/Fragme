@@ -1,4 +1,4 @@
-package com.iuicity.xinjr.feature.two;
+package com.iuicity.xinjr.feature.invest;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,15 +10,16 @@ import com.iuicity.xinjr.R;
 import com.iuicity.xinjr.base.BaseFragment;
 
 /**
- * Created by Shui on 2017/7/6.
+ * 活期界面
+ * Created by Shui on 2017/7/13.
  */
 
-public class TwoFragment extends BaseFragment {
-    public static TwoFragment newInstance() {
-        
+public class DueOnDemandFragment extends BaseFragment {
+    public static DueOnDemandFragment newInstance() {
+
         Bundle args = new Bundle();
-        
-        TwoFragment fragment = new TwoFragment();
+
+        DueOnDemandFragment fragment = new DueOnDemandFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -26,7 +27,7 @@ public class TwoFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_two, container, false);
+        View inflate = inflater.inflate(R.layout.fragment_due_on_demand, container, false);
         return inflate;
     }
 }

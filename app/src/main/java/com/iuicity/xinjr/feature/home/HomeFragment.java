@@ -1,7 +1,9 @@
 package com.iuicity.xinjr.feature.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,6 +16,9 @@ import com.iuicity.xinjr.adapter.ProductAdapter;
 import com.iuicity.xinjr.base.BaseFragment;
 import com.iuicity.xinjr.network.helper.RxSchedulersHelper;
 import com.iuicity.xinjr.utils.StatusBarUtil;
+import com.iuicity.xinjr.widget.magicindicator.MagicIndicator;
+import com.iuicity.xinjr.widget.magicindicator.SolidCircleNavigator;
+import com.iuicity.xinjr.widget.magicindicator.ViewPagerHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,10 +42,15 @@ public class HomeFragment extends BaseFragment {
     ViewPager mVpBanner;
     @BindView(R.id.vp_product)
     ViewPager mVpProduct;
+    @BindView(R.id.cl_container)
+    ConstraintLayout mClContainer;
+    @BindView(R.id.magic_indicator)
+    MagicIndicator mMagicIndicator;
 
     private Unbinder unbinder;
     private List<String> mBannerUrls = new ArrayList<>();
     private Disposable mBannerSubscribe;
+    private List<String> mProductData;
 
     public static HomeFragment newInstance() {
 
@@ -69,6 +79,44 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initView() {
+        initBanner();
+        initProduct();
+    }
+
+    private void initProduct() {
+        mVpProduct.setOffscreenPageLimit(3);
+        mProductData = Arrays.asList("hehe", "haha", "xixi", "adss");
+        ProductAdapter productAdapter = new ProductAdapter(mProductData, mActivity);
+        mVpProduct.setAdapter(productAdapter);
+        mVpProduct.setPageMargin(20);
+        mVpProduct.setOffscreenPageLimit(3);
+        mVpProduct.setCurrentItem(1);
+        mClContainer.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return mVpProduct.dispatchTouchEvent(event);
+            }
+        });
+        initIndicator();
+    }
+
+    private void initIndicator() {
+        SolidCircleNavigator circleNavigator = new SolidCircleNavigator(mActivity);
+        circleNavigator.setCircleCount(mProductData.size());
+        circleNavigator.setSelectColor(Color.YELLOW);
+        circleNavigator.setNormalColor(Color.GRAY);
+        circleNavigator.setCircleClickListener(new SolidCircleNavigator.OnCircleClickListener() {
+            @Override
+            public void onClick(int index) {
+                mVpProduct.setCurrentItem(index);
+            }
+        });
+        mMagicIndicator.setNavigator(circleNavigator);
+        ViewPagerHelper.bind(mMagicIndicator, mVpProduct);
+        mMagicIndicator.onPageSelected(1);
+    }
+
+    private void initBanner() {
         BannerAdapter adapter = new BannerAdapter(mBannerUrls, mActivity);
         mVpBanner.setAdapter(adapter);
         mVpBanner.setCurrentItem(Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2) % mBannerUrls.size());
@@ -87,11 +135,6 @@ public class HomeFragment extends BaseFragment {
                 return false;
             }
         });
-        mVpProduct.setOffscreenPageLimit(3);
-        List<String> productData = Arrays.asList("hehe", "haha", "xixi", "adss");
-        ProductAdapter productAdapter = new ProductAdapter(productData, mActivity);
-        mVpProduct.setAdapter(productAdapter);
-        mVpProduct.setPageMargin(20);
     }
 
 

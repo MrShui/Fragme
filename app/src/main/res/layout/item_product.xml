@@ -2,59 +2,66 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="5dp">
 
+
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <ImageView
-            android:id="@+id/iv_360_icn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_title"
+        <LinearLayout
+            android:id="@+id/ll_title_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:text="360金融.小定保-尊享370HN123M-VIP1B期"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_360_icn"
-            app:layout_constraintLeft_toRightOf="@+id/iv_360_icn"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/iv_360_icn" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_360_icn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="360金融.小定保-尊享" />
+
+        </LinearLayout>
+
 
         <com.iuicity.xinjr.widget.CircleProgress
             android:id="@+id/cp_annualized"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             app:antiAlias="true"
             app:arcWidth="5dp"
-            app:bgArcColor="@color/colorAccent"
+            app:bgArcColor="@android:color/darker_gray"
             app:bgArcWidth="5dp"
-            app:hint="截止当前已走"
-            app:hintSize="15sp"
+            app:hint="预期年化"
+            app:hintColor="#9e9e9e"
+            app:hintSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_360_icn"
-            app:maxValue="10000"
-            app:startAngle="135"
-            app:sweepAngle="270"
-            app:unit="步"
-            app:unitSize="15sp"
-            app:value="10000"
-            app:valueSize="25sp" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_title_container"
+            app:startAngle="270"
+            app:sweepAngle="360"
+            app:unit="%"
+            app:unitSize="25sp"
+            app:value="100"
+            app:valueSize="35sp" />
 
         <TextView
             android:id="@+id/tv_day"

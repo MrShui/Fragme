@@ -118,7 +118,7 @@
         <!-- 圆环宽度 -->
         <attr name="circleWidth" format="dimension" />
         <!-- 圆环颜色 -->
-        <attr name="circleColor" format="color|reference" />
+        <attr name="selectColor" format="color|reference" />
         <!-- 背景圆环颜色 -->
         <attr name="bgCircleColor" format="color|reference" />
         <!-- 锁定水波不随圆环进度改变，默认锁定在50%处 -->

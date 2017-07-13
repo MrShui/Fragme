@@ -530,7 +530,7 @@ public class StatusBarUtil {
      */
     public static void setTranslucentForImageViewInFragment(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha,
                                                             View needOffsetView) {
-        setTranslucentForImageView(activity, statusBarAlpha, needOffsetView, true);
+        setTranslucentForImageView(activity, statusBarAlpha, needOffsetView, false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             clearPreviousSetting(activity);
         }
