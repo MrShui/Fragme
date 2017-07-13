@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.iuicity.xinjr.R;
 import com.iuicity.xinjr.base.BaseActivity;
-import com.iuicity.xinjr.feature.one.OneFragment;
+import com.iuicity.xinjr.feature.home.HomeFragment;
 import com.iuicity.xinjr.feature.three.ThreeFragment;
 import com.iuicity.xinjr.feature.two.TwoFragment;
 
@@ -30,9 +30,9 @@ public class MainActivity extends BaseActivity {
     private final static String LAST_SHOW_ID_KEY = "last_show_id_key";
 
     {
-        mFragmentSparseArray.append(R.id.tv_one, OneFragment.newInstance());
-        mFragmentSparseArray.append(R.id.tv_two, TwoFragment.newInstance());
-        mFragmentSparseArray.append(R.id.tv_three, ThreeFragment.newInstance());
+        mFragmentSparseArray.append(R.id.tv_home, HomeFragment.newInstance());
+        mFragmentSparseArray.append(R.id.tv_invest, TwoFragment.newInstance());
+        mFragmentSparseArray.append(R.id.tv_mine, ThreeFragment.newInstance());
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         if (savedInstanceState == null) {
-            mLastShowId = R.id.tv_one;
+            mLastShowId = R.id.tv_home;
             loadMultiRootFragment();
         } else {
             mLastShowId = savedInstanceState.getInt(LAST_SHOW_ID_KEY);
@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_one, R.id.tv_two, R.id.tv_three})
+    @OnClick({R.id.tv_home, R.id.tv_invest, R.id.tv_mine})
     public void onClick(View v) {
         if (v.getId() == mLastShowId) return;
 

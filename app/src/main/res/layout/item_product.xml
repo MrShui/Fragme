@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="5dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iv_360_icn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="360金融.小定保-尊享370HN123M-VIP1B期"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_360_icn"
+            app:layout_constraintLeft_toRightOf="@+id/iv_360_icn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_360_icn" />
+
+        <com.iuicity.xinjr.widget.CircleProgress
+            android:id="@+id/cp_annualized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            app:antiAlias="true"
+            app:arcWidth="5dp"
+            app:bgArcColor="@color/colorAccent"
+            app:bgArcWidth="5dp"
+            app:hint="截止当前已走"
+            app:hintSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_360_icn"
+            app:maxValue="10000"
+            app:startAngle="135"
+            app:sweepAngle="270"
+            app:unit="步"
+            app:unitSize="15sp"
+            app:value="10000"
+            app:valueSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="44天"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_deadline"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_deadline"
+            app:layout_constraintRight_toRightOf="@+id/tv_deadline" />
+
+        <TextView
+            android:id="@+id/tv_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="期限"
+            app:layout_constraintBottom_toBottomOf="@+id/cp_annualized"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/btn_buy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:text="立即购买"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cp_annualized" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

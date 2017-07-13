@@ -35,11 +35,13 @@ public class BaseFragment extends Fragment implements LifecycleProvider<Fragment
     private KProgressHUD mKProgressHUD;
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
+    protected Activity mActivity;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         lifecycleSubject.onNext(FragmentEvent.ATTACH);
+        mActivity = activity;
     }
 
     @Override
