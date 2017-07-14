@@ -13,8 +13,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="4dp"
+        android:background="@drawable/shape_bottom_menu_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,26 +28,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/selector_bottom_home_icon"
             android:gravity="center"
-            android:text="首页" />
+            android:text="@string/home"
+            android:textColor="@drawable/selector_bottom_text"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_invest"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
             android:gravity="center"
-            android:text="投资" />
+            android:text="@string/invest"
+            android:textColor="@drawable/selector_bottom_text"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_mine"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
             android:gravity="center"
-            android:text="我的" />
+            android:text="@string/mine"
+            android:textColor="@drawable/selector_bottom_text"
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>

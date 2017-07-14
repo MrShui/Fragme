@@ -1,9 +1,9 @@
 package com.iuicity.xinjr.feature.home;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -72,7 +72,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_home, container, false);
-        StatusBarUtil.setTranslucentForImageViewInFragment(mActivity, null);
+        StatusBarUtil.stateBarSetting(mActivity, true);
         unbinder = ButterKnife.bind(this, inflate);
         initView();
         return inflate;
@@ -103,8 +103,8 @@ public class HomeFragment extends BaseFragment {
     private void initIndicator() {
         SolidCircleNavigator circleNavigator = new SolidCircleNavigator(mActivity);
         circleNavigator.setCircleCount(mProductData.size());
-        circleNavigator.setSelectColor(Color.YELLOW);
-        circleNavigator.setNormalColor(Color.GRAY);
+        circleNavigator.setSelectColor(ContextCompat.getColor(mActivity, R.color.orange_ef));
+        circleNavigator.setNormalColor(ContextCompat.getColor(mActivity, R.color.gray_d8));
         circleNavigator.setCircleClickListener(new SolidCircleNavigator.OnCircleClickListener() {
             @Override
             public void onClick(int index) {

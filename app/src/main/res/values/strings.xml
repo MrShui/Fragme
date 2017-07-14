@@ -6,4 +6,15 @@
     <string name="login">登录</string>
     <string name="dont_have_account">没有账号，</string>
     <string name="regist_immediately">立即注册！</string>
+    <string name="please_input_verify_code">请输入验证码</string>
+    <string name="send_verify_code">发送验证码</string>
+    <string name="reset_password">重置密码</string>
+    <string name="password_rule">密码：6-20位数字、字母组合</string>
+    <string name="home">首页</string>
+    <string name="invest">投资</string>
+    <string name="mine">我的</string>
+    <string name="regular_intervals">定期</string>
+    <string name="due_on_demand">活期</string>
+    <string name="attention">关注</string>
+    <string name="more">更多</string>
 </resources>

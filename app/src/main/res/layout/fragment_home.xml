@@ -11,7 +11,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_banner"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="184dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,11 +20,10 @@
         android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@android:color/white"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vp_banner">
@@ -33,37 +32,45 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="7dp"
+            android:drawableTop="@mipmap/regular"
             android:gravity="center_horizontal"
-            android:text="定期"
-            android:textSize="16sp" />
+            android:text="@string/regular_intervals"
+            android:textColor="@color/font_black_33"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="7dp"
+            android:drawableTop="@mipmap/current_icon"
             android:gravity="center_horizontal"
-            android:text="活期"
-            android:textSize="16sp" />
+            android:text="@string/due_on_demand"
+            android:textColor="@color/font_black_33"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="7dp"
+            android:drawableTop="@mipmap/download_icon"
             android:gravity="center_horizontal"
-            android:text="关注"
-            android:textSize="16sp" />
+            android:text="@string/attention"
+            android:textColor="@color/font_black_33"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="7dp"
+            android:drawableTop="@mipmap/more_icon"
             android:gravity="center_horizontal"
-            android:text="更多"
-            android:textSize="16sp" />
+            android:text="@string/more"
+            android:textColor="@color/font_black_33"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

@@ -17,6 +17,10 @@
 
     <color name="orange_f5">#f5832a</color>
     <color name="orange_e2">#e27928</color>
+    <color name="orange_ef">#efbb92</color>
+    <color name="gray_d8">#d8d8d8</color>
     <color name="gray_dc">#dcdcdc</color>
 
+    <drawable name="drawable_orange_f5">@color/orange_f5</drawable>
+    <drawable name="drawable_gray_99">@color/font_gray_99</drawable>
 </resources>

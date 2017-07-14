@@ -13,6 +13,10 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".feature.login.LoginActivity">
+
+        </activity>
+
+        <activity android:name=".feature.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".feature.main.MainActivity">
+        <activity android:name=".feature.login.ForgetPasswordActivity">
+
+        </activity>
+
+        <activity android:name=".feature.login.RegisterActivity">
 
         </activity>
     </application>

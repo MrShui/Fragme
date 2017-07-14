@@ -28,10 +28,36 @@ import java.lang.reflect.Method;
  */
 public class StatusBarUtil {
 
-    public static final int DEFAULT_STATUS_BAR_ALPHA = 0;
+    public static final int DEFAULT_STATUS_BAR_ALPHA = 112;
     private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
     private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;
+
+    public static void stateBarSetting(Activity activity, boolean isImageActivity) {
+        String carrier = Build.MANUFACTURER;
+        int alpha;
+        if (TextUtils.equals(carrier.toUpperCase(), "XIAOMI") || TextUtils.equals(carrier.toUpperCase(), "MEIZU") || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alpha = 0;
+        } else {
+            alpha = 170;
+        }
+        if (isImageActivity) {
+            setTranslucentForImageView(activity, alpha, null, false);
+        } else {
+            setColor(activity, Color.WHITE, alpha, true);
+        }
+    }
+
+    public static void stateBarSetting(Activity activity, View needOffSetView) {
+        String carrier = Build.MANUFACTURER;
+        int alpha;
+        if (TextUtils.equals(carrier.toUpperCase(), "XIAOMI") || TextUtils.equals(carrier.toUpperCase(), "MEIZU") || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alpha = 0;
+        } else {
+            alpha = 170;
+        }
+        setTranslucentForImageViewInFragment(activity, alpha, needOffSetView);
+    }
 
     /**
      * 设置状态栏颜色
@@ -81,56 +107,6 @@ public class StatusBarUtil {
             setRootView(activity);
         }
     }
-
-//    /**
-//     * 为滑动返回界面设置状态栏颜色
-//     *
-//     * @param activity 需要设置的activity
-//     * @param color    状态栏颜色值
-//     */
-//    public static void setColorForSwipeBack(Activity activity, int color) {
-//        setColorForSwipeBack(activity, color, DEFAULT_STATUS_BAR_ALPHA);
-//    }
-
-//    /**
-//     * 为滑动返回界面设置状态栏颜色
-//     *
-//     * @param activity       需要设置的activity
-//     * @param color          状态栏颜色值
-//     * @param statusBarAlpha 状态栏透明度
-//     */
-//    public static void setColorForSwipeBack(Activity activity, @ColorInt int color,
-//                                            @IntRange(from = 0, to = 255) int statusBarAlpha) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//
-//            ViewGroup contentView = ((ViewGroup) activity.findViewById(android.R.id.content));
-//            View rootView = contentView.getChildAt(0);
-//            int statusBarHeight = getStatusBarHeight(activity);
-//            if (rootView != null && rootView instanceof CoordinatorLayout) {
-//                final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) rootView;
-//                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//                    coordinatorLayout.setFitsSystemWindows(false);
-//                    contentView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
-//                    boolean isNeedRequestLayout = contentView.getPaddingTop() < statusBarHeight;
-//                    if (isNeedRequestLayout) {
-//                        contentView.setPadding(0, statusBarHeight, 0, 0);
-//                        coordinatorLayout.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                coordinatorLayout.requestLayout();
-//                            }
-//                        });
-//                    }
-//                } else {
-//                    coordinatorLayout.setStatusBarBackgroundColor(calculateStatusColor(color, statusBarAlpha));
-//                }
-//            } else {
-//                contentView.setPadding(0, statusBarHeight, 0, 0);
-//                contentView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
-//            }
-//            setTransparentForWindow(activity, false);
-//        }
-//    }
 
     /**
      * 设置状态栏纯色 不加半透明效果
@@ -530,7 +506,7 @@ public class StatusBarUtil {
      */
     public static void setTranslucentForImageViewInFragment(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha,
                                                             View needOffsetView) {
-        setTranslucentForImageView(activity, statusBarAlpha, needOffsetView, false);
+        setTranslucentForImageView(activity, statusBarAlpha, needOffsetView, true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             clearPreviousSetting(activity);
         }
