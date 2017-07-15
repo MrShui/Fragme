@@ -11,47 +11,9 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/shape_bottom_menu_line" />
-
-    <LinearLayout
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp">
-
-        <TextView
-            android:id="@+id/tv_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/selector_bottom_home_icon"
-            android:gravity="center"
-            android:text="@string/home"
-            android:textColor="@drawable/selector_bottom_text"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tv_invest"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/invest"
-            android:textColor="@drawable/selector_bottom_text"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tv_mine"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/mine"
-            android:textColor="@drawable/selector_bottom_text"
-            android:textSize="12sp" />
-    </LinearLayout>
+        android:layout_gravity="bottom" />
 </LinearLayout>
